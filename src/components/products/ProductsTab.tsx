@@ -1,5 +1,9 @@
+'use client';
+
 import Link from "next/link";
 import Product from "./Product";
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { useEffect, useState } from "react";
 
 interface ProductTabType {
     tabList: string[];
@@ -17,39 +21,49 @@ interface ProductTabType {
 
 
 export default function ProductsTab({ tabList, tabPanel }: ProductTabType) {
+
+    const [isClient, setIsClient] = useState(false)
+
+    useEffect(() => {
+        setIsClient(true)
+    }, []);
+
+    if (!isClient) return null;
+
+
     return (
         <section className="food_section layout_padding-bottom">
-            <div className="container">
+            <Tabs selectedTabClassName="active" className="container">
                 <div className="heading_container heading_center">
                     <h2>
                         منو محصولات
                     </h2>
                 </div>
 
-                <ul className="filters_menu">
-                    {tabList.map((item, index) => (
-                        <li key={index}>{item}</li>
+                <TabList className="filters_menu">
+                    {tabList.map((list, index) => (
+                        <Tab key={index}>{list}</Tab>
                     ))}
-                </ul>
+                </TabList>
 
                 <div className="filters-content">
-                    <div className="row grid">
-                        {tabPanel.map((items, index) => (
-                            <div key={index} className="col-sm-6 col-lg-4">
-                                {items.map(product => (
-                                    <Product key={product.id} product={product} />
-                                ))}
-                            </div>
-                        ))}
-                    </div>
+                    {tabPanel.map((panel, index) => (
+                        <TabPanel key={index} className="row grid">
+                            {panel.map(product => (
+                                <div key={product.id} className="col-sm-6 col-lg-4">
+                                    <Product product={product} />
+                                </div>
+                            ))}
+                        </TabPanel>
+                    ))}
                 </div>
-                
+
                 <div className="btn-box">
                     <Link href="/menu">
                         مشاهده بیشتر
                     </Link>
                 </div>
-            </div>
+            </Tabs>
         </section>
     );
 }
