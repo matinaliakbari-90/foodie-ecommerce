@@ -1305,3 +1305,23 @@ a:focus {
     width: 50%;
   }
 }
+
+
+
+
+/* استایل برای نوار پیشرفت */
+#nprogress .bar {
+  background: #ffbe33 !important;
+  height: 3px !important;
+}
+
+/* استایل برای اسپینر */
+#nprogress .spinner-icon {
+  border-top-color: #ffbe33 !important;
+  border-left-color: #ffbe33 !important;
+}
+
+/* استایل برای نقطه پالس */
+#nprogress .peg {
+  box-shadow: 0 0 10px #ffbe33, 0 0 5px #ffbe33 !important;
+}

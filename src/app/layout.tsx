@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import BootstrapClient from "@/components/lib/BootstrapClient";
 import Header from "@/components/layout/Header";
+import NextProgressBar from "@/components/lib/NextNprogressBar";
 
 
 export const metadata: Metadata = {
@@ -17,11 +18,13 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body>
-        <Header />
+        <NextProgressBar>
+          <Header />
 
-        {children}
+          {children}
 
-        <BootstrapClient />
+          <BootstrapClient />
+        </NextProgressBar>
       </body>
     </html>
   );
