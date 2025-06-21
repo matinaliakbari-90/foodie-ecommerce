@@ -1,3 +1,4 @@
+import { getBlurDataURL, numberFormat } from "@/utils/Helper";
 import Image from "next/image";
 
 interface ProductType {
@@ -17,7 +18,7 @@ export default function Product({ product }: ProductType) {
         <div key={product.id} className="box">
             <div>
                 <div className="img-box">
-                    <Image className="img-fluid" placeholder="blur" width={370} height={200} src={product.primary_image} alt="primary-image" />
+                    <Image className="img-fluid" placeholder="blur" blurDataURL={getBlurDataURL()} width={370} height={200} src={product.primary_image} alt="primary-image" />
                 </div>
                 <div className="detail-box">
                     <h5>{product.name}</h5>
@@ -25,13 +26,13 @@ export default function Product({ product }: ProductType) {
                     <div className="options">
                         {product.is_sale ? (
                             <h6>
-                                <span>{product.sale_price}</span>
-                                <del className="me-2 text-danger">{product.price}</del>
+                                <span>{numberFormat(product.sale_price)}</span>
+                                <del className="me-2 text-danger">{numberFormat(product.price)}</del>
                                 <span style={{ marginRight: '4px' }}>تومان</span>
                             </h6>
                         ) : (
                             <h6>
-                                {product.price}
+                                {numberFormat(product.price)}
                                 <span style={{ marginRight: '4px' }}>تومان</span>
                             </h6>
                         )}
