@@ -1,6 +1,6 @@
 import Features from "@/components/Features";
 import ProductsTab from "@/components/products/ProductsTab";
-import { getFetch } from "@/utils/Fetch";
+import { getFetch } from "@/utils/fetch";
 
 export default async function Home() {
 

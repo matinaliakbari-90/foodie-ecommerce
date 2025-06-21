@@ -1,5 +1,5 @@
 const getFetch = async (url: string, headers?: object) => {
-    const res = await fetch(`http://127.0.0.1:8000/api${url}`, {
+    const res = await fetch(`${process.env.API_URL}${url}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

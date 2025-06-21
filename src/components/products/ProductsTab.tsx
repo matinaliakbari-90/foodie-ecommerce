@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import Product from "./Product";
 
 interface ProductTabType {
     tabList: string[];
@@ -34,43 +34,16 @@ export default function ProductsTab({ tabList, tabPanel }: ProductTabType) {
 
                 <div className="filters-content">
                     <div className="row grid">
-                        {tabPanel.map((product, index) => (
+                        {tabPanel.map((items, index) => (
                             <div key={index} className="col-sm-6 col-lg-4">
-                                {product.map(item => (
-                                    <div key={item.id} className="box">
-                                        <div>
-                                            <div className="img-box">
-                                                <Image className="img-fluid" width={370} height={200} src={item.primary_image} alt="primary-image" />
-                                            </div>
-                                            <div className="detail-box">
-                                                <h5>{item.name}</h5>
-                                                <p>{item.description}</p>
-                                                <div className="options">
-                                                    {item.is_sale ? (
-                                                        <h6>
-                                                            <span>{item.sale_price}</span>
-                                                            <del className="me-2 text-danger">{item.price}</del>
-                                                            <span style={{ marginRight: '4px' }}>تومان</span>
-                                                        </h6>
-                                                    ) : (
-                                                        <h6>
-                                                            {item.price}
-                                                            <span style={{ marginRight: '4px' }}>تومان</span>
-                                                        </h6>
-                                                    )}
-
-                                                    <a href="">
-                                                        <i className="bi bi-cart-fill text-white fs-5"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                {items.map(product => (
+                                    <Product key={product.id} product={product} />
                                 ))}
                             </div>
                         ))}
                     </div>
                 </div>
+                
                 <div className="btn-box">
                     <Link href="/menu">
                         مشاهده بیشتر
