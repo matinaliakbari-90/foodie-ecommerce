@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import NextProgressBar from "@/components/lib/NextNprogressBar";
 import Toastify from "@/components/lib/Toastify";
 import Footer from "@/components/layout/Footer";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Nextjs Ecommerce Foodie",
@@ -19,15 +20,17 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl">
       <body>
-        <NextProgressBar>
-          <Header />
+        <Suspense>
+          <NextProgressBar>
+            <Header />
 
-          {children}
+            {children}
 
-          <Footer />
-          <Toastify />
-          <BootstrapClient />
-        </NextProgressBar>
+            <Footer />
+            <Toastify />
+            <BootstrapClient />
+          </NextProgressBar>
+        </Suspense>
       </body>
     </html>
   );
