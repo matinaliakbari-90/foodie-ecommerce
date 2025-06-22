@@ -1325,3 +1325,9 @@ a:focus {
 #nprogress .peg {
   box-shadow: 0 0 10px #ffbe33, 0 0 5px #ffbe33 !important;
 }
+
+
+
+.form-control::placeholder {
+  color: #211c1c95 !important;
+}
