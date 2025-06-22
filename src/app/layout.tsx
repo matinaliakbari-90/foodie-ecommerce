@@ -3,7 +3,7 @@ import "./globals.css";
 import BootstrapClient from "@/components/lib/BootstrapClient";
 import Header from "@/components/layout/Header";
 import NextProgressBar from "@/components/lib/NextNprogressBar";
-
+import Toastify from "@/components/lib/Toastify";
 
 export const metadata: Metadata = {
   title: "Nextjs Ecommerce Foodie",
@@ -23,6 +23,7 @@ export default function RootLayout({
 
           {children}
 
+          <Toastify />
           <BootstrapClient />
         </NextProgressBar>
       </body>

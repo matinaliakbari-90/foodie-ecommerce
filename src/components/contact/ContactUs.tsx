@@ -1,4 +1,48 @@
+"use client";
+
+import { create } from "@/actions/contact";
+import { useActionState, useEffect } from "react";
+import { toast, Zoom } from "react-toastify";
+
+interface StateAction {
+    status: string | null;
+    message: string | null;
+}
+
 export default function ContactMe() {
+
+    const [state, formAction, pending] = useActionState<StateAction, FormData>(create, { status: null, message: null });
+
+    useEffect(() => {
+        if (state?.status === 'error') {
+            toast.error(state.message, {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Zoom,
+                rtl: true
+            })
+        } else if (state?.status === 'success') {
+            toast.success(state.message, {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Zoom,
+                rtl: true
+            })
+        }
+    }, [state])
+
     return (
         <section className="book_section layout_padding">
             <div className="container">
@@ -10,23 +54,24 @@ export default function ContactMe() {
                 <div className="row">
                     <div className="col-md-6">
                         <div className="form_container">
-                            <form action="">
+                            <form action={formAction}>
                                 <div>
-                                    <input type="text" className="form-control" placeholder="نام و نام خانوادگی" />
+                                    <input name="name" type="text" className="form-control" placeholder="نام و نام خانوادگی" />
                                 </div>
                                 <div>
-                                    <input type="email" style={{ direction: "rtl" }} className="form-control" placeholder="ایمیل" />
+                                    <input name="email" type="email" style={{ direction: "rtl" }} className="form-control" placeholder="ایمیل" />
                                 </div>
                                 <div>
-                                    <input type="text" className="form-control" placeholder="موضوع پیام" />
+                                    <input name="subject" type="text" className="form-control" placeholder="موضوع پیام" />
                                 </div>
                                 <div>
-                                    <textarea rows={10} style={{ height: '100px' }} className="form-control"
+                                    <textarea name="text" rows={10} style={{ height: '100px' }} className="form-control"
                                         placeholder="متن پیام">
                                     </textarea>
                                 </div>
                                 <div className="btn_box">
-                                    <button>
+                                    <button disabled={pending}>
+                                        {pending && <span className="spinner-border spinner-border-sm me-2"></span>}
                                         ارسال پیام
                                     </button>
                                 </div>
