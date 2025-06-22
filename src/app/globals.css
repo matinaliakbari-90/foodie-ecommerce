@@ -1331,3 +1331,35 @@ a:focus {
 .form-control::placeholder {
   color: #211c1c95 !important;
 }
+
+
+
+
+.Toastify__toast-body {
+  font-family: "Vazir", sans-serif !important;
+  direction: rtl;
+}
+
+
+/* Bootstrap overrides for Leaflet */
+.bootstrap-popup .leaflet-popup-content-wrapper {
+  border-radius: 0.5rem !important;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid #dee2e6 !important;
+}
+
+.bootstrap-popup .leaflet-popup-content {
+  margin: 0 !important;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+
+.bootstrap-popup .leaflet-popup-tip-container {
+  display: none;
+}
+
+.leaflet-control-attribution {
+  font-size: 0.75rem !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 0.25rem !important;
+  padding: 0.25rem 0.5rem !important;
+}

@@ -3,6 +3,7 @@
 import { create } from "@/actions/contact";
 import { useActionState, useEffect } from "react";
 import { toast, Zoom } from "react-toastify";
+import dynamic from "next/dynamic";
 
 interface StateAction {
     status: string | null;
@@ -11,6 +12,7 @@ interface StateAction {
 
 
 export default function ContactMe() {
+    const ContactMap = dynamic(() => import('./ContactMap'), { ssr: false })
 
     const [state, formAction, pending] = useActionState<StateAction, FormData>(create, { status: null, message: null });
 
@@ -81,7 +83,7 @@ export default function ContactMe() {
                     </div>
                     <div className="col-md-6">
                         <div className="map_container ">
-                            <div id="map" style={{ height: "345px" }}></div>
+                            <ContactMap />
                         </div>
                     </div>
                 </div>
