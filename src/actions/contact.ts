@@ -1,5 +1,8 @@
 "use server";
 
+import { postFetch } from "@/utils/fetch";
+import { handleError } from "@/utils/Helper";
+
 
 interface StateAction {
     status: string | null;
@@ -7,44 +10,30 @@ interface StateAction {
 }
 
 
-export async function create(state:StateAction, formData:FormData) {
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const subject = formData.get('subject');
-    const text = formData.get('text');
+export async function create(state: StateAction, formData: FormData): Promise<StateAction> {
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const subject = formData.get('subject') as string;
+    const text = formData.get('text') as string;
 
-
-    if (name === '') {
+    if (name === "" || email === "" || subject === "" || text === "") {
         return {
-            status: 'error',
-            message: 'فیلد نام و نام خانوادگی نمی تواند خالی باشه باشد'
-        }
+            status: "error",
+            message: "تمام فیلد های مربوط به تماس با ما الزامی هستند"
+        };
     }
 
-    if (email === '') {
+    const data = await postFetch('/contact-us', { name, email, subject, text })
+
+    if (data.status === 'success') {
         return {
-            status: 'error',
-            message: 'فیلد ایمیل نمی تواند خالی باشه باشد'
+            status: data.status,
+            message: 'ارسال پیام با موفقیت انجام شد'
         }
-    }
-
-    if (subject === '') {
+    } else {
         return {
-            status: 'error',
-            message: 'فیلد موضوع پیام نمی تواند خالی باشه باشد'
+            status: data.status,
+            message: String(handleError(data.message))
         }
-    }
-
-    if (text === '') {
-        return {
-            status: 'error',
-            message: 'فیلد متن پیام نمی تواند نمی تواند خالی باشه باشد'
-        }
-    }
-
-
-    return {
-        status: null,
-        message: null
     }
 }

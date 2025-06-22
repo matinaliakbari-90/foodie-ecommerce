@@ -8,5 +8,28 @@ const numberFormat = (number: number) => {
 }
 
 
+interface TErrrorMessage {
+    name: string[];
+    email: string[];
+    subject: string[];
+    text: string[];
+}
 
-export { getBlurDataURL, numberFormat }
+const handleError = (message: TErrrorMessage) => {
+    if (typeof message === 'object') {
+        const errors: string[] | null = [];
+        
+        (Object.keys(message) as (keyof TErrrorMessage)[]).map((key) => {
+            message[key].map((error: string) => {
+                errors.push(error);
+            })
+
+            return errors.join(' ')
+        })
+    }
+
+    return message
+}
+
+
+export { getBlurDataURL, numberFormat, handleError }

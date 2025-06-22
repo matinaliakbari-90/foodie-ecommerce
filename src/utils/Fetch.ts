@@ -1,3 +1,11 @@
+type PostBody = {
+    name: string;
+    email: string;
+    subject: string;
+    text: string;
+} | null
+
+
 const getFetch = async (url: string, headers?: object) => {
     const res = await fetch(`${process.env.API_URL}${url}`, {
         method: 'GET',
@@ -17,5 +25,20 @@ const getFetch = async (url: string, headers?: object) => {
 }
 
 
+const postFetch = async (url: string, body: PostBody, headers?: object) => {
+    const res = await fetch(`${process.env.API_URL}${url}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            ...headers
+        },
+        body: JSON.stringify(body)
+    })
 
-export { getFetch }
+    return await res.json();
+}
+
+
+
+export { getFetch, postFetch }
