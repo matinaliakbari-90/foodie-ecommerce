@@ -10,8 +10,8 @@ export default function GlobalError({
     return (
         // global-error must include html and body tags
         <html>
-            <body>
-                <h2>{error.message}</h2>
+            <body className="text-center">
+                <h2 className="mt-5 mb-3">{error.message}</h2>
                 <button onClick={() => reset()}>تلاش مجدد</button>
             </body>
         </html>
