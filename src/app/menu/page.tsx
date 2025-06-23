@@ -1,5 +1,6 @@
 import Categories from "@/components/menu/Categories";
 import ProductsList from "@/components/menu/ProductsList";
+import Search from "@/components/menu/Search";
 import { getFetch } from "@/utils/fetch";
 
 export default async function MenuPage({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
@@ -11,20 +12,16 @@ export default async function MenuPage({ searchParams }: { searchParams: { [key:
         params.set('page', searchParams.page.toString())
     }
 
+    if (searchParams.search) {
+        params.set("search", searchParams.search.toString());
+    }
+
     return (
         <section className="food_section layout_padding">
             <div className="container">
                 <div className="row">
                     <div className="col-sm-12 col-lg-3">
-                        <div>
-                            <label className="form-label">جستجو</label>
-                            <div className="input-group mb-3">
-                                <input type="text" className="form-control" placeholder="نام محصول ..." />
-                                <a href="#" className="input-group-text">
-                                    <i className="bi bi-search"></i>
-                                </a>
-                            </div>
-                        </div>
+                        <Search />
 
                         <hr />
 
