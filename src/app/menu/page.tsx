@@ -1,28 +1,33 @@
 import Categories from "@/components/menu/Categories";
+import Loading from "@/components/menu/Loading";
 import ProductsList from "@/components/menu/ProductsList";
 import Search from "@/components/menu/Search";
 import Sort from "@/components/menu/Sort";
 import { getFetch } from "@/utils/fetch";
+import { Suspense } from "react";
+
+
 
 export default async function MenuPage({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
 
     const categories = await getFetch('/categories')
     const params = new URLSearchParams()
+    const resolveParams = await searchParams;
 
-    if (searchParams.page) {
-        params.set('page', searchParams.page.toString())
+    if (resolveParams.page) {
+        params.set('page', resolveParams.page.toString())
     }
 
-    if (searchParams.search) {
-        params.set("search", searchParams.search.toString());
+    if (resolveParams.search) {
+        params.set("search", resolveParams.search.toString());
     }
 
-    if (searchParams.category) {
-        params.set('category', searchParams.category.toString())
+    if (resolveParams.category) {
+        params.set('category', resolveParams.category.toString())
     }
 
-    if (searchParams.sortBy) {
-        params.set('sortBy', searchParams.sortBy.toString())
+    if (resolveParams.sortBy) {
+        params.set('sortBy', resolveParams.sortBy.toString())
     }
 
     return (
@@ -42,7 +47,9 @@ export default async function MenuPage({ searchParams }: { searchParams: { [key:
                     </div>
 
                     <div className="col-sm-12 col-lg-9">
-                        <ProductsList params={params.toString()} />
+                        <Suspense key={params.toString()} fallback={<Loading />}>
+                            <ProductsList params={params.toString()} />
+                        </Suspense>
                     </div>
                 </div>
             </div>

@@ -20,7 +20,7 @@ export default function Sort() {
         <div>
             <label className="form-label">مرتب سازی</label>
             <div className="form-check my-2">
-                <input onClick={() => handleSort('max')} id="max" className="form-check-input" type="radio" name="flexRadioDefault"
+                <input onChange={() => handleSort('max')} id="max" className="form-check-input" type="radio" name="flexRadioDefault"
                     checked={searchParams.has('sortBy') && searchParams.get('sortBy') === 'max'}
                 />
                 <label htmlFor="max" className="form-check-label cursor-pointer">
@@ -28,7 +28,7 @@ export default function Sort() {
                 </label>
             </div>
             <div className="form-check my-2">
-                <input onClick={() => handleSort('min')} id="min" className="form-check-input" type="radio" name="flexRadioDefault"
+                <input onChange={() => handleSort('min')} id="min" className="form-check-input" type="radio" name="flexRadioDefault"
                     checked={searchParams.has('sortBy') && searchParams.get('sortBy') === 'min'}
                 />
                 <label htmlFor="min" className="form-check-label cursor-pointer">
@@ -36,7 +36,7 @@ export default function Sort() {
                 </label>
             </div>
             <div className="form-check my-2">
-                <input onClick={() => handleSort('bestseller')} id="bestseller" className="form-check-input" type="radio" name="flexRadioDefault"
+                <input onChange={() => handleSort('bestseller')} id="bestseller" className="form-check-input" type="radio" name="flexRadioDefault"
                     checked={searchParams.has('sortBy') && searchParams.get('sortBy') === 'bestseller'}
                 />
                 <label htmlFor="bestseller" className="form-check-label cursor-pointer">
@@ -44,7 +44,7 @@ export default function Sort() {
                 </label>
             </div>
             <div className="form-check my-2">
-                <input onClick={() => handleSort('sale')} id="sale" className="form-check-input" type="radio" name="flexRadioDefault"
+                <input onChange={() => handleSort('sale')} id="sale" className="form-check-input" type="radio" name="flexRadioDefault"
                     checked={searchParams.has('sortBy') && searchParams.get('sortBy') === 'sale'}
                 />
                 <label htmlFor="sale" className="form-check-label cursor-pointer">
