@@ -20,7 +20,7 @@ export default function Paginate({ links }: PaginateType) {
         const params = new URLSearchParams(searchParams);
         params.set('page', page)
 
-        router.replace(`${pathname}?${params.toString()}`)
+        router.push(`${pathname}?${params.toString()}`)
     }
 
     return (

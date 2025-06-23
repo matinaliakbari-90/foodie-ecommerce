@@ -6,10 +6,9 @@ export default async function MenuPage({ searchParams }: { searchParams: { [key:
 
     const categories = await getFetch('/categories')
     const params = new URLSearchParams()
-    const resolveParams = await searchParams;
 
-    if (resolveParams.page) {
-        params.set('page', resolveParams.page.toString())
+    if (searchParams.page) {
+        params.set('page', searchParams.page.toString())
     }
 
     return (
