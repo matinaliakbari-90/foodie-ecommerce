@@ -15,7 +15,7 @@ interface ProductType {
 
 export default function Product({ product }: ProductType) {
     return (
-        <div key={product.id} className="box">
+        <div className="box">
             <div>
                 <div className="img-box">
                     <Image className="img-fluid" placeholder="blur" blurDataURL={getBlurDataURL()} width={370} height={200} src={product.primary_image} alt="primary-image" />
