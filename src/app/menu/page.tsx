@@ -16,6 +16,10 @@ export default async function MenuPage({ searchParams }: { searchParams: { [key:
         params.set("search", searchParams.search.toString());
     }
 
+    if (searchParams.category) {
+        params.set('category', searchParams.category.toString())
+    }
+
     return (
         <section className="food_section layout_padding">
             <div className="container">
