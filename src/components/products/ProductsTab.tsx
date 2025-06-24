@@ -19,6 +19,18 @@ interface ProductTabType {
 }
 
 
+interface ProductPanelType {
+    id: number;
+    name: string;
+    primary_image: string;
+    description: string;
+    is_sale: boolean;
+    sale_price: number;
+    price: number;
+    slug?: string;
+}
+
+
 
 export default function ProductsTab({ tabList, tabPanel }: ProductTabType) {
 
@@ -49,7 +61,7 @@ export default function ProductsTab({ tabList, tabPanel }: ProductTabType) {
                 <div className="filters-content">
                     {tabPanel.map((panel, index) => (
                         <TabPanel key={index} className="row grid">
-                            {panel.map(product => (
+                            {panel.map((product: ProductPanelType) => (
                                 <div key={product.id} className="col-sm-6 col-lg-4">
                                     <Product product={product} />
                                 </div>

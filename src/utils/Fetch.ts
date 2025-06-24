@@ -1,8 +1,10 @@
 type PostBody = {
-    name: string;
-    email: string;
-    subject: string;
-    text: string;
+    name?: string;
+    email?: string;
+    subject?: string;
+    text?: string;
+
+    cellphone?: string;
 } | null
 
 

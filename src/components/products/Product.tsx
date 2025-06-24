@@ -11,7 +11,7 @@ interface ProductType {
         is_sale: boolean;
         sale_price: number;
         price: number;
-        slug: string;
+        slug?: string;
     }
 }
 
@@ -19,12 +19,12 @@ export default function Product({ product }: ProductType) {
     return (
         <div className="box">
             <div>
-                <Link href={`/products/${decodeURI(product.slug)}`} className="img-box">
+                <Link href={`/products/${product?.slug}`} className="img-box">
                     <Image className="img-fluid" placeholder="blur" blurDataURL={getBlurDataURL()} width={370} height={200} src={product.primary_image} alt="primary-image" />
                 </Link>
                 <div className="detail-box">
                     <h5>
-                        <Link href={`/products/${decodeURI(product.slug)}`}>
+                        <Link href={`/products/${product?.slug}`}>
                             {product.name}
                         </Link>
                     </h5>
