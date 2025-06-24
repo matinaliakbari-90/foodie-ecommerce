@@ -18,7 +18,7 @@ interface TErrrorMessage {
 const handleError = (message: TErrrorMessage) => {
     if (typeof message === 'object') {
         const errors: string[] | null = [];
-        
+
         (Object.keys(message) as (keyof TErrrorMessage)[]).map((key) => {
             message[key].map((error: string) => {
                 errors.push(error);
@@ -32,4 +32,9 @@ const handleError = (message: TErrrorMessage) => {
 }
 
 
-export { getBlurDataURL, numberFormat, handleError }
+const salePresent = (price: number, sale_price: number) => {
+    return Math.round((((price - sale_price) / price ) * 100))
+}
+
+
+export { getBlurDataURL, numberFormat, handleError, salePresent }

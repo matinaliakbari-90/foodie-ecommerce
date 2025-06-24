@@ -1,5 +1,6 @@
 import { getBlurDataURL, numberFormat } from "@/utils/Helper";
 import Image from "next/image";
+import Link from "next/link";
 
 interface ProductType {
     product: {
@@ -10,6 +11,7 @@ interface ProductType {
         is_sale: boolean;
         sale_price: number;
         price: number;
+        slug: string;
     }
 }
 
@@ -17,11 +19,15 @@ export default function Product({ product }: ProductType) {
     return (
         <div className="box">
             <div>
-                <div className="img-box">
+                <Link href={`/products/${decodeURI(product.slug)}`} className="img-box">
                     <Image className="img-fluid" placeholder="blur" blurDataURL={getBlurDataURL()} width={370} height={200} src={product.primary_image} alt="primary-image" />
-                </div>
+                </Link>
                 <div className="detail-box">
-                    <h5>{product.name}</h5>
+                    <h5>
+                        <Link href={`/products/${decodeURI(product.slug)}`}>
+                            {product.name}
+                        </Link>
+                    </h5>
                     <p>{product.description}</p>
                     <div className="options">
                         {product.is_sale ? (

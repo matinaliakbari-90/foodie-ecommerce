@@ -1363,3 +1363,11 @@ a:focus {
   border-radius: 0.25rem !important;
   padding: 0.25rem 0.5rem !important;
 }
+
+
+
+.product-quantity {
+  color: #d32e2e;
+  margin-block: 5px;
+  font-size: 12px;
+}
