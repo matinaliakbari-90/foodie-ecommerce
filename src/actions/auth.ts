@@ -10,8 +10,8 @@ interface StateAction {
     message: string | null;
 }
 
-export async function login(state: StateAction, formData: FormData) {
-    const cellphone = formData.get("cellphone") as string | null;
+export async function login(stateLogin: StateAction, formData: FormData) {
+    const cellphone = formData.get("cellphone") as string;
 
     if (!cellphone) {
         return {
@@ -49,5 +49,48 @@ export async function login(state: StateAction, formData: FormData) {
             status: data.status,
             message: String(handleError(data.message))
         };
+    }
+}
+
+
+
+export async function checkOtp(stateOtp: StateAction, formData: FormData) {
+    const otp = formData.get("otp") as string;
+
+    if (!otp) {
+        return {
+            status: 'error',
+            message: 'کد ورود الزامی است .'
+        }
+    }
+
+    const pattern = /^[0-9]{6}$/;
+    if (!pattern.test(otp.toString())) {
+        return {
+            status: 'error',
+            message: 'فرمت کد ورود صحیح نیست .'
+        }
+    }
+
+    const loginToken = (await cookies()).get('login_token');
+    if (!loginToken) {
+        return {
+            status: 'error',
+            message: 'توکن ورودی شما نامعتبر است، بار دیگر تلاش کنید'
+        }
+    }
+
+    const data = await postFetch('/auth/check-otp', { otp, login_token: loginToken?.value })
+
+    if (data.status === 'success') {
+        return {
+            status: data.status,
+            message: 'شما با موفقیت وارد شدید .'
+        }
+    } else {
+        return {
+            status: data.status,
+            message: handleError(data.message)
+        }
     }
 }

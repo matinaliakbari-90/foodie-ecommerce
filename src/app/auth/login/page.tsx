@@ -1,3 +1,5 @@
+"use client";
+
 import CheckOtpForm from "@/components/auth/CheckOtpForm";
 import LoginForm from "@/components/auth/LoginForm";
 import { useState } from "react";
@@ -13,9 +15,13 @@ export default function LoginPage() {
                     <div className="col-md-4 offset-md-4">
                         <div className="card">
                             <div className="card-body">
-                                <LoginForm setStep={setStep} />
-
-                                <CheckOtpForm />
+                                {step === 1 && (
+                                    <LoginForm setStep={setStep} />
+                                )}
+                                
+                                {step === 2 && (
+                                    <CheckOtpForm />
+                                )}
                             </div>
                         </div>
                     </div>

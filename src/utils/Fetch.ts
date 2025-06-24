@@ -5,6 +5,8 @@ type PostBody = {
     text?: string;
 
     cellphone?: string;
+    otp?: string;
+    login_token?: string;
 } | null
 
 
