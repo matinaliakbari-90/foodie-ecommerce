@@ -9,7 +9,6 @@ interface CategoriesType {
     }[];
 }
 
-// filter-list-active
 
 export default function Categories({ categories }: CategoriesType) {
 
@@ -24,7 +23,7 @@ export default function Categories({ categories }: CategoriesType) {
 
         router.push(`${pathname}?${params.toString()}`)
     }
-    // "my-2 cursor-pointer"
+
     return (
         <div className="filter-list">
             <div className="form-label">

@@ -11,13 +11,13 @@ export default function Footer() {
                                 تماس با ما
                             </h4>
                             <div className="contact_link_box">
-                                <Link href="/">
+                                <Link href="/" className="mb-3">
                                     <i className="bi bi-geo-alt-fill"></i>
                                     <span>
                                         آدرس
                                     </span>
                                 </Link>
-                                <Link href="/">
+                                <Link href="/" className="mb-3">
                                     <div className="d-flex justify-content-center">
                                         <i className="bi bi-telephone-fill" aria-hidden="true"></i>
                                         <span className="my-0" style={{ direction: "ltr" }}>
