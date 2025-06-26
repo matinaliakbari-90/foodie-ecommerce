@@ -94,7 +94,7 @@ export async function checkOtp(stateOtp: StateAction, formData: FormData) {
         (await cookies()).delete('login_token');
 
         (await cookies()).set({
-            name: 'token',
+            name: 'tokens',
             value: data.data.token,
             httpOnly: true,
             path: '/',
@@ -119,15 +119,15 @@ export async function checkOtp(stateOtp: StateAction, formData: FormData) {
 
 
 export async function me() {
-    const token = (await cookies()).get('token')
+    const tokens = (await cookies()).get('tokens')
 
-    if (!token) {
+    if (!tokens) {
         return {
             error: 'Not Authorized'
         }
     }
 
-    const data = await postFetch('/auth/me', {}, { "Authorization": `Bearer ${token?.value}` })
+    const data = await postFetch('/auth/me', {}, { "Authorization": `Bearer ${tokens?.value}` })
 
     if (data.status === 'success') {
         return {
