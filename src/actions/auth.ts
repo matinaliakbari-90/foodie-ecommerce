@@ -54,7 +54,7 @@ export async function login(stateLogin: StateAction, formData: FormData) {
     } else {
         return {
             status: data.status,
-            message: String(handleError(data.message))
+            message: handleError(data.message)
         };
     }
 }
@@ -80,7 +80,7 @@ export async function checkOtp(stateOtp: StateAction, formData: FormData) {
         }
     }
 
-    const loginToken = (await cookies()).get('login_token');
+    const loginToken = (await cookies()).get('login_token')
     if (!loginToken) {
         return {
             status: 'error',
@@ -88,7 +88,7 @@ export async function checkOtp(stateOtp: StateAction, formData: FormData) {
         }
     }
 
-    const data = await postFetch('/auth/check-otp', { otp, login_token: loginToken?.value })
+    const data = await postFetch('/auth/check-otp', { otp: otp.toString(), login_token: loginToken?.value })
 
     if (data.status === 'success') {
         (await cookies()).delete('login_token');
@@ -110,7 +110,7 @@ export async function checkOtp(stateOtp: StateAction, formData: FormData) {
     } else {
         return {
             status: data.status,
-            message: String(handleError(data.message))
+            message: handleError(data.message)
         }
     }
 }
@@ -172,7 +172,7 @@ export async function resendOtp() {
     } else {
         return {
             status: data.status,
-            message: String(handleError(data.message))
+            message: handleError(data.message)
         }
     }
 }

@@ -33,7 +33,7 @@ export async function create(state: StateAction, formData: FormData): Promise<St
     } else {
         return {
             status: data.status,
-            message: String(handleError(data.message))
+            message: handleError(data.message)
         }
     }
 }

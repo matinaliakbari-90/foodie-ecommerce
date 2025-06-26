@@ -16,24 +16,23 @@ interface TErrrorMessage {
 }
 
 const handleError = (message: TErrrorMessage) => {
-    if (typeof message === 'object') {
+    if (typeof message === "object") {
         const errors: string[] | null = [];
-
         (Object.keys(message) as (keyof TErrrorMessage)[]).map((key) => {
             message[key].map((error: string) => {
                 errors.push(error);
-            })
+            });
+        });
 
-            return errors.join(' ')
-        })
+        return errors.join(" ")
     }
 
-    return message
-}
+    return message;
+};
 
 
 const salePresent = (price: number, sale_price: number) => {
-    return Math.round((((price - sale_price) / price ) * 100))
+    return Math.round((((price - sale_price) / price) * 100))
 }
 
 
