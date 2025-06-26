@@ -55,12 +55,12 @@ export default function EditProfile({ user }: { user: UserProfileType }) {
         <form action={formAction} className="vh-70">
             <div className="row g-4">
                 <div className="col col-md-6">
-                    <label className="form-label">نام و نام خانوادگی</label>
-                    <input name="name" type="text" className="form-control" defaultValue={user.name} />
+                    <label className="form-label" htmlFor="name">نام و نام خانوادگی</label>
+                    <input name="name" type="text" id="name" className="form-control" defaultValue={user.name} />
                 </div>
                 <div className="col col-md-6">
-                    <label className="form-label">ایمیل</label>
-                    <input name="email" type="email" className="form-control" defaultValue={user.email} />
+                    <label className="form-label" htmlFor="email">ایمیل</label>
+                    <input name="email" type="email" id="email" className="form-control" defaultValue={user.email} />
                 </div>
                 <div className="col col-md-6">
                     <label className="form-label">شماره تلفن</label>

@@ -7,6 +7,12 @@ type PostBody = {
     cellphone?: string;
     otp?: string;
     login_token?: string;
+
+    title?: string;
+    postal_code?: string;
+    province_id?: string;
+    city_id?: string;
+    address?: string;
 } | null
 
 

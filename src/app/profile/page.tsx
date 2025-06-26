@@ -1,4 +1,4 @@
-import EditProfile from "@/components/profile/EditProfile";
+import EditProfile from "@/components/profile/info/EditProfile";
 import { getFetch } from "@/utils/fetch";
 import { cookies } from "next/headers";
 
