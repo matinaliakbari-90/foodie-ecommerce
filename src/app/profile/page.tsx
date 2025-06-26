@@ -1,21 +1,13 @@
-export default function ProfilePage() {
+import EditProfile from "@/components/profile/EditProfile";
+import { getFetch } from "@/utils/fetch";
+import { cookies } from "next/headers";
+
+export default async function ProfilePage() {
+
+    const tokens = (await cookies()).get('tokens')
+    const user = await getFetch('/profile/info', { "Authorization": `Bearer ${tokens?.value}` })
+
     return (
-        <form className="vh-70">
-            <div className="row g-4">
-                <div className="col col-md-6">
-                    <label className="form-label">نام و نام خانوادگی</label>
-                    <input type="text" className="form-control" value="لورم ایپسوم" />
-                </div>
-                <div className="col col-md-6">
-                    <label className="form-label">ایمیل</label>
-                    <input type="text" className="form-control" value="test@gmail.com" />
-                </div>
-                <div className="col col-md-6">
-                    <label className="form-label">شماره تلفن</label>
-                    <input type="text" disabled className="form-control" value="09100000000" />
-                </div>
-            </div>
-            <button type="submit" className="btn btn-primary mt-4">ویرایش</button>
-        </form>
+        <EditProfile user={user} />
     );
 }
