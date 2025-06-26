@@ -5,6 +5,7 @@ import AuthContext, { AuthContextType } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useActionState, useContext, useEffect } from "react";
 import { toast, Zoom } from "react-toastify";
+import ResendOtpForm from "./ResendOtpForm";
 
 
 type User = {
@@ -61,7 +62,7 @@ export default function CheckOtpForm() {
             router.push('/')
         }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [stateOtp, router])
 
     return (
@@ -76,6 +77,8 @@ export default function CheckOtpForm() {
                     تایید
                 </button>
             </form>
+
+            <ResendOtpForm />
         </div>
     );
 }

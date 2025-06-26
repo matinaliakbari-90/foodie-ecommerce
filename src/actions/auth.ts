@@ -139,3 +139,40 @@ export async function me() {
         }
     }
 }
+
+
+
+
+export async function resendOtp() {
+    const loginToken = (await cookies()).get('login_token');
+
+    if (!loginToken) {
+        return {
+            status: 'error',
+            message: 'توکن ورودی شما نامعتبر است، بار دیگر تلاش کنید'
+        }
+    }
+
+    const data = await postFetch('/auth/resend-otp', { login_token: loginToken.value })
+
+    if (data.status === 'success') {
+        (await cookies()).set({
+            name: 'login_token',
+            value: data.data.login_token,
+            httpOnly: true,
+            path: '/',
+            maxAge: 60 * 60 * 24 * 7,  // 1 week
+            secure: process.env.NODE_ENV === 'production'
+        })
+
+        return {
+            status: data.status,
+            message: 'کد ورود دوباره برای شما ارسال شد .'
+        }
+    } else {
+        return {
+            status: data.status,
+            message: String(handleError(data.message))
+        }
+    }
+}

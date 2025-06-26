@@ -1371,3 +1371,11 @@ a:focus {
   margin-block: 5px;
   font-size: 12px;
 }
+
+
+
+.resend-otp-button {
+  position: absolute;
+  bottom: 16px;
+  left: 15px;
+}
