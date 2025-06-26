@@ -4,11 +4,14 @@ import Image from "next/image";
 import HeroImage from '../../../public/images/hero-bg.jpg';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useContext } from "react";
+import AuthContext, { AuthContextType } from "@/context/AuthContext";
 
 
 export default function Header() {
 
-    const pathname = usePathname()
+    const pathname = usePathname();
+    const { user } = useContext(AuthContext) as AuthContextType;
 
     return (
         <div className={pathname === '/' ? '' : 'sub_page'}>
@@ -55,9 +58,15 @@ export default function Header() {
                                         </span>
                                     </Link>
 
-                                    <Link href="/auth/login" className="btn-auth">
-                                        ورود
-                                    </Link>
+                                    {user ? (
+                                        <Link href="/profile" className="btn-auth">
+                                            پروفایل
+                                        </Link>
+                                    ) : (
+                                        <Link href="/auth/login" className="btn-auth">
+                                            ورود
+                                        </Link>
+                                    )}
                                 </div>
                             </div>
                         </nav>

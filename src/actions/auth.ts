@@ -5,10 +5,16 @@ import { handleError } from "@/utils/Helper";
 import { cookies } from "next/headers";
 
 
+type User = {
+    id: number;
+    name: string;
+    email: string;
+}
+
 interface StateAction {
     status: string | null;
     message: string | null;
-    user?: string | null;
+    user?: User | null;
 }
 
 export async function login(stateLogin: StateAction, formData: FormData) {

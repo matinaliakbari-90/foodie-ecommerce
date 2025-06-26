@@ -1,21 +1,30 @@
 "use client";
 
 import { checkOtp } from "@/actions/auth";
+import AuthContext, { AuthContextType } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import { useActionState, useEffect } from "react";
+import { useActionState, useContext, useEffect } from "react";
 import { toast, Zoom } from "react-toastify";
+
+
+type User = {
+    id: number;
+    name: string;
+    email: string;
+}
 
 interface StateAction {
     status: string | null;
     message: string | null;
-    user?: string | null;
+    user?: User | null;
 }
 
 
 export default function CheckOtpForm() {
 
     const [stateOtp, formActionOtp, pending] = useActionState<StateAction, FormData>(checkOtp, { status: null, message: null })
-    const router = useRouter()
+    const router = useRouter();
+    const { loginContext } = useContext(AuthContext) as AuthContextType;
 
     useEffect(() => {
         if (stateOtp?.status === 'error') {
@@ -45,10 +54,14 @@ export default function CheckOtpForm() {
                 rtl: true
             })
 
+            if (stateOtp?.user) {
+                loginContext(stateOtp.user)
+            }
+
             router.push('/')
         }
 
-    }, [stateOtp, router])
+    }, [stateOtp, router, loginContext])
 
     return (
         <div className="form_container">

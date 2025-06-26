@@ -6,6 +6,7 @@ import NextProgressBar from "@/components/lib/NextNprogressBar";
 import Toastify from "@/components/lib/Toastify";
 import Footer from "@/components/layout/Footer";
 import { Suspense } from "react";
+import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata: Metadata = {
   title: "Nextjs Ecommerce Foodie",
@@ -21,15 +22,17 @@ export default function RootLayout({
     <html lang="fa" dir="rtl">
       <body>
         <Suspense>
-          <NextProgressBar>
-            <Header />
+          <AuthProvider>
+            <NextProgressBar>
+              <Header />
 
-            {children}
+              {children}
 
-            <Footer />
-            <Toastify />
-            <BootstrapClient />
-          </NextProgressBar>
+              <Footer />
+              <Toastify />
+              <BootstrapClient />
+            </NextProgressBar>
+          </AuthProvider>
         </Suspense>
       </body>
     </html>
