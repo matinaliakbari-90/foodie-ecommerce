@@ -8,6 +8,7 @@ import { cookies } from "next/headers";
 interface StateAction {
     status: string | null;
     message: string | null;
+    user?: string | null;
 }
 
 export async function login(stateLogin: StateAction, formData: FormData) {
@@ -54,6 +55,7 @@ export async function login(stateLogin: StateAction, formData: FormData) {
 
 
 
+
 export async function checkOtp(stateOtp: StateAction, formData: FormData) {
     const otp = formData.get("otp") as string;
 
@@ -83,14 +85,26 @@ export async function checkOtp(stateOtp: StateAction, formData: FormData) {
     const data = await postFetch('/auth/check-otp', { otp, login_token: loginToken?.value })
 
     if (data.status === 'success') {
+        (await cookies()).delete('login_token');
+
+        (await cookies()).set({
+            name: 'token',
+            value: data.data.token,
+            httpOnly: true,
+            path: '/',
+            maxAge: 60 * 60 * 24 * 7,  // 1 week
+            secure: process.env.NODE_ENV === 'production'
+        })
+
         return {
             status: data.status,
-            message: 'شما با موفقیت وارد شدید .'
+            message: 'شما با موفقیت وارد شدید .',
+            user: data.data.user
         }
     } else {
         return {
             status: data.status,
-            message: handleError(data.message)
+            message: String(handleError(data.message))
         }
     }
 }

@@ -1,10 +1,54 @@
 "use client";
 
-import { useActionState } from "react";
+import { checkOtp } from "@/actions/auth";
+import { useRouter } from "next/navigation";
+import { useActionState, useEffect } from "react";
+import { toast, Zoom } from "react-toastify";
+
+interface StateAction {
+    status: string | null;
+    message: string | null;
+    user?: string | null;
+}
+
 
 export default function CheckOtpForm() {
 
-    const [stateOtp, formActionOtp, pending] = useActionState(checkOtp, {})
+    const [stateOtp, formActionOtp, pending] = useActionState<StateAction, FormData>(checkOtp, { status: null, message: null })
+    const router = useRouter()
+
+    useEffect(() => {
+        if (stateOtp?.status === 'error') {
+            toast.error(stateOtp.message, {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Zoom,
+                rtl: true
+            })
+        } else if (stateOtp?.status === 'success') {
+            toast.success(stateOtp.message, {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Zoom,
+                rtl: true
+            })
+
+            router.push('/')
+        }
+
+    }, [stateOtp, router])
 
     return (
         <div className="form_container">

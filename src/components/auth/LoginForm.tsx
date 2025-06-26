@@ -43,7 +43,7 @@ export default function LoginForm({ setStep }: { setStep: (step: number) => void
 
             setStep(2)
         }
-    })
+    }, [stateLogin, setStep])
 
     return (
         <div className="form_container">
