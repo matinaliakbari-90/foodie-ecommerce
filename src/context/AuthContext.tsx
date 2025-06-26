@@ -1,6 +1,7 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { me } from "@/actions/auth";
+import { createContext, useEffect, useState } from "react";
 
 type User = {
     id: number;
@@ -23,6 +24,22 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const loginContext = (user: User) => {
         setUser(user)
     }
+
+
+    useEffect(() => {
+        const checkExistUserLogin = async () => {
+            const data = await me();
+            
+            if (data.error) {
+                setUser(null)
+            } else {
+                setUser(data.user)
+            }
+        }
+
+        checkExistUserLogin()
+    }, [])
+
 
     return (
         <AuthContext value={{ user, loginContext }}>

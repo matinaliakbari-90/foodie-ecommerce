@@ -114,3 +114,28 @@ export async function checkOtp(stateOtp: StateAction, formData: FormData) {
         }
     }
 }
+
+
+
+
+export async function me() {
+    const token = (await cookies()).get('token')
+
+    if (!token) {
+        return {
+            error: 'Not Authorized'
+        }
+    }
+
+    const data = await postFetch('/auth/me', {}, { "Authorization": `Bearer ${token?.value}` })
+
+    if (data.status === 'success') {
+        return {
+            user: data.data
+        }
+    } else {
+        return {
+            error: 'User Forbbiden'
+        }
+    }
+}

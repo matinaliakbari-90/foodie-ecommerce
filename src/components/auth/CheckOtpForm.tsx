@@ -61,7 +61,8 @@ export default function CheckOtpForm() {
             router.push('/')
         }
 
-    }, [stateOtp, router, loginContext])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [stateOtp, router])
 
     return (
         <div className="form_container">
