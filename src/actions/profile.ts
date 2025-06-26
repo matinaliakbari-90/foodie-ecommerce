@@ -102,6 +102,8 @@ export async function createAddress(state: StateAction, formData: FormData) {
     }, { "Authorization": `Bearer ${tokens?.value}` })
 
     if (data.status === 'success') {
+        revalidatePath('/profile/addresses')
+
         return {
             status: data.status,
             message: 'ثبت آدرس با موفقیت انجام شد .'

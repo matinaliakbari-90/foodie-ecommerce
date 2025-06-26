@@ -1,7 +1,8 @@
 "use client"
 
 import { createAddress } from "@/actions/profile";
-import { ChangeEvent, useActionState, useState } from "react";
+import { ChangeEvent, useActionState, useEffect, useState } from "react";
+import { toast, Zoom } from "react-toastify";
 
 interface AddressesProps {
     provinces: {
@@ -31,6 +32,37 @@ export default function CreateForm({ data }: { data: AddressesProps }) {
     }
 
     const [stateCreate, formActionCreate, pending] = useActionState<StateAction, FormData>(createAddress, { status: null, message: null })
+
+
+    useEffect(() => {
+        if (stateCreate?.status === 'error') {
+            toast.error(stateCreate.message, {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Zoom,
+                rtl: true
+            })
+        } else if (stateCreate?.status === 'success') {
+            toast.success(stateCreate.message, {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Zoom,
+                rtl: true
+            })
+        }
+    }, [stateCreate])
 
     return (
         <>
