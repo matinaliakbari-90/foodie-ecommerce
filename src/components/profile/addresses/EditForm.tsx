@@ -3,6 +3,7 @@
 import { editAddress } from "@/actions/profile";
 import { useActionState, useEffect, useState } from "react";
 import { toast, Zoom } from "react-toastify";
+import DeleteForm from "./DeleteForm";
 
 interface AddressesType {
     id: number;
@@ -119,11 +120,7 @@ export default function EditForm({ address, data }: { address: AddressesType, da
                 </div>
             </form>
 
-            <form className="btn-address-delete">
-                <button className="btn btn-dark">
-                    حذف
-                </button>
-            </form>
+            <DeleteForm />
         </div>
     );
 }
