@@ -1,27 +1,32 @@
 import { getBlurDataURL, numberFormat } from "@/utils/Helper";
 import Image from "next/image";
+import Paginate from "./Paginate";
+import { getFetch } from "@/utils/fetch";
+import { cookies } from "next/headers";
 
 
-interface OrderPropsType {
-    orders: {
+interface OrderType {
+    id: number;
+    address_title: string;
+    status: string;
+    payment_status: string;
+    paying_amount: number;
+    created_at: string;
+    order_items: Array<{
         id: number;
-        address_title: string;
-        status: string;
-        payment_status: string;
-        paying_amount: number;
-        created_at: string;
-        order_items: Array<{
-            id: number;
-            product_primary_image: string;
-            product_name: string;
-            price: number;
-            quantity: number;
-            subtotal: number;
-        }>
-    }[]
+        product_primary_image: string;
+        product_name: string;
+        price: number;
+        quantity: number;
+        subtotal: number;
+    }>
 }
 
-export default function Table({ data }: { data: OrderPropsType }) {
+export default async function Table() {
+
+    const tokens = (await cookies()).get('tokens')
+    const data = await getFetch('/profile/orders', { "Authorization": `Bearer ${tokens?.value}` })
+
     return (
         <>
             <div className="table-responsive">
@@ -37,7 +42,7 @@ export default function Table({ data }: { data: OrderPropsType }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.orders.map(order => (
+                        {data.orders.map((order: OrderType) => (
                             <tr key={order.id}>
                                 <th>{order.id}</th>
                                 <td>{order.address_title}</td>
@@ -97,13 +102,8 @@ export default function Table({ data }: { data: OrderPropsType }) {
                     </tbody>
                 </table>
             </div>
-            <nav className="d-flex justify-content-center mt-5">
-                <ul className="pagination">
-                    <li className="page-item active"><a className="page-link" href="#">1</a></li>
-                    <li className="page-item"><a className="page-link" href="#">2</a></li>
-                    <li className="page-item"><a className="page-link" href="#">3</a></li>
-                </ul>
-            </nav>
+
+            <Paginate links={data.meta.links} />
         </>
     );
 }
