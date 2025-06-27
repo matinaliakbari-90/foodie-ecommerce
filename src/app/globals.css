@@ -1383,7 +1383,7 @@ a:focus {
 
 
 .text-active-click {
-  color: rgba(255, 174, 0, 0.773);
+  color: #feb61cca !important;
 }
 
 
