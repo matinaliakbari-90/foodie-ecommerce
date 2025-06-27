@@ -109,7 +109,7 @@ export default async function Table({ params }: { params: string }) {
                     <Paginate links={data.meta.links} />
                 </>
             ) : (
-                <div className="d-flex flex-column align-items-center py-4">
+                <div className="d-flex flex-column align-items-center py-5">
                     <i className="bi bi-bag-x fs-1 text-muted"></i>
                     <p className="mt-3 fs-5 text-secondary">هنوز سفارشی ثبت نکرده‌اید!</p>
                     <Link href="/menu" className="btn btn-outline-primary">
