@@ -176,3 +176,25 @@ export async function resendOtp() {
         }
     }
 }
+
+
+
+export async function logout() {
+    const tokens = (await cookies()).get('tokens')
+
+    if (!tokens) {
+        return {
+            status: 'error',
+            message: 'توکن ورودی الزامی است .'
+        }
+    }
+
+    const data = await postFetch('/auth/logout', {}, { "Authorization": `Bearer ${tokens?.value}` })
+
+    if (data.status === 'success') {
+        (await cookies()).delete('tokens')
+
+    } else {
+        throw new Error('خطا در عملیات خروج')
+    }
+}
