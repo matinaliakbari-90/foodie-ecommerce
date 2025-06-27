@@ -22,10 +22,10 @@ interface OrderType {
     }>
 }
 
-export default async function Table() {
+export default async function Table({ params }: { params: string }) {
 
     const tokens = (await cookies()).get('tokens')
-    const data = await getFetch('/profile/orders', { "Authorization": `Bearer ${tokens?.value}` })
+    const data = await getFetch(`/profile/orders?${params}`, { "Authorization": `Bearer ${tokens?.value}` })
 
     return (
         <>
