@@ -178,13 +178,43 @@ export async function editAddress(state: StateAction, formData: FormData) {
         address_id: rowFormData.address_id as string
     }, { "Authorization": `Bearer ${tokens?.value}` })
 
-    
+
     if (data.status === 'success') {
         revalidatePath('/profile/addresses')
 
         return {
             status: data.status,
             message: 'ویرایش آدرس با موفقیت انجام شد .'
+        }
+    } else {
+        return {
+            status: data.status,
+            message: handleError(data.message)
+        }
+    }
+}
+
+
+
+export async function deleteAddress(state: StateAction, formData: FormData) {
+    const address_id = formData.get('address_id') as string;
+
+    if (address_id === null || address_id === '') {
+        return {
+            status: 'error',
+            message: 'شناسه آدرس الزامی است .'
+        }
+    }
+
+    const tokens = (await cookies()).get('tokens')
+    const data = await postFetch('/profile/addresses/delete', { address_id }, { "Authorization": `Bearer ${tokens?.value}` })
+
+    if (data.status === 'success') {
+        revalidatePath('/profile/addresses')
+
+        return {
+            status: data.status,
+            message: 'حذف با موفقیت انجام شد .'
         }
     } else {
         return {

@@ -120,7 +120,7 @@ export default function EditForm({ address, data }: { address: AddressesType, da
                 </div>
             </form>
 
-            <DeleteForm />
+            <DeleteForm addressId={address.id} />
         </div>
     );
 }
