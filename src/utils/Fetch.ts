@@ -13,6 +13,7 @@ type PostBody = {
     province_id?: string;
     city_id?: string;
     address?: string;
+    address_id?: string;
 } | null
 
 
