@@ -23,11 +23,10 @@ export default function CreateForm({ data }: { data: AddressesProps }) {
     const [address, setAddress] = useState("");
 
 
-    const citiesFilter = data.cities.filter(
-        (city) => city.province_id.toString() === provinceId
-    );
+    // فیلتر شهرها بر اساس استان انتخاب‌شده
+    const citiesFilter = data.cities.filter((city) => city.province_id.toString() === provinceId);
 
-
+    // وقتی کاربر استان را عوض کند، شهرها را به‑روز می‌کنیم
     const changeProvince = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const newProvinceId = e.target.value;
         setProvinceId(newProvinceId);
@@ -78,6 +77,7 @@ export default function CreateForm({ data }: { data: AddressesProps }) {
     }, [data.cities, data.provinces, stateCreate]);
 
 
+    // ارسال فرم
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData();
@@ -87,6 +87,7 @@ export default function CreateForm({ data }: { data: AddressesProps }) {
         formData.append("province_id", provinceId);
         formData.append("city_id", cityId);
         formData.append("address", address);
+        // اجرای اکشن داخل یک ترنزیشن تا React هشدار "outside transition" ندهد
         startTransition(() => {
             formActionCreate(formData);
         });
@@ -142,8 +143,6 @@ export default function CreateForm({ data }: { data: AddressesProps }) {
                     </div>
                 </form>
             </div>
-
-            <hr />
         </>
     );
 }
