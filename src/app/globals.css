@@ -1385,3 +1385,10 @@ a:focus {
 .text-active-click {
   color: rgba(255, 174, 0, 0.773);
 }
+
+
+.btn-address-delete {
+  position: absolute;
+  bottom: 15px;
+  left: 16px;
+}

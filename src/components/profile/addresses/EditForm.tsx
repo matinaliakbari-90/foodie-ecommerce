@@ -73,7 +73,7 @@ export default function EditForm({ address, data }: { address: AddressesType, da
     }, [stateEdit])
 
     return (
-        <div className="mt-3">
+        <div className="mt-3 position-relative">
             <form action={formActionEdit} className="card card-body">
                 <div className="row g-4">
                     <div className="col col-md-6">
@@ -117,6 +117,12 @@ export default function EditForm({ address, data }: { address: AddressesType, da
                         ویرایش
                     </button>
                 </div>
+            </form>
+
+            <form className="btn-address-delete">
+                <button className="btn btn-dark">
+                    حذف
+                </button>
             </form>
         </div>
     );
