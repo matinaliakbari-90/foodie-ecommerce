@@ -14,6 +14,8 @@ type PostBody = {
     city_id?: string;
     address?: string;
     address_id?: string;
+
+    code?: string;
 } | null
 
 

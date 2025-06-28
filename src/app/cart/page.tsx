@@ -1,16 +1,20 @@
 "use client";
 
+import Coupon from "@/components/cart/Coupon";
 import { clearCart, decrement, increment, removeFromCart } from "@/redux/slices/cartSlice";
 import { AppDispatch, RootState } from "@/redux/store";
 import { getBlurDataURL, numberFormat, salePresent } from "@/utils/Helper";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function CartPage() {
 
     const dispatch = useDispatch<AppDispatch>()
     const cart = useSelector((state: RootState) => state.shoppingCart.cart)
+
+    const [coupon, setCoupon] = useState({ 'percent': 0, 'code': '' })
 
     return (
         <>
@@ -93,13 +97,8 @@ export default function CartPage() {
                                     </div>
                                 </div>
                                 <div className="row mt-4">
-                                    <div className="col-12 col-md-6">
-                                        <div className="input-group mb-3">
-                                            <input type="text" className="form-control" placeholder="کد تخفیف" />
-                                            <button className="input-group-text" id="basic-addon2">اعمال کد
-                                                تخفیف</button>
-                                        </div>
-                                    </div>
+                                    <Coupon setCoupon={setCoupon} />
+
                                     <div className="col-12 col-md-6 d-flex justify-content-end align-items-baseline">
                                         <div>
                                             انتخاب آدرس
