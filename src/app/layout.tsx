@@ -7,6 +7,7 @@ import Toastify from "@/components/lib/Toastify";
 import Footer from "@/components/layout/Footer";
 import { Suspense } from "react";
 import { AuthProvider } from "@/context/AuthContext";
+import Providers from "@/redux/Provider";
 
 export const metadata: Metadata = {
   title: "Nextjs Ecommerce Foodie",
@@ -22,17 +23,19 @@ export default function RootLayout({
     <html lang="fa" dir="rtl">
       <body>
         <Suspense>
-          <AuthProvider>
-            <NextProgressBar>
-              <Header />
+          <Providers>
+            <AuthProvider>
+              <NextProgressBar>
+                <Header />
 
-              {children}
+                {children}
 
-              <Footer />
-              <Toastify />
-              <BootstrapClient />
-            </NextProgressBar>
-          </AuthProvider>
+                <Footer />
+                <Toastify />
+                <BootstrapClient />
+              </NextProgressBar>
+            </AuthProvider>
+          </Providers>
         </Suspense>
       </body>
     </html>
