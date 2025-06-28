@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from '../store';
 
 
 interface Product {
@@ -58,3 +59,12 @@ export const cartSlice = createSlice({
 
 export const { addToCart, removeFromCart, increment, decrement, clearCart } = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;
+
+
+
+
+export const totalAmountCart = (state: RootState) => {
+    return state.shoppingCart.cart.reduce((total, item) => {
+        return item.product.is_sale ? total + (item.product.sale_price * item.qty) : total + (item.product.price * item.qty)
+    }, 0)
+}
