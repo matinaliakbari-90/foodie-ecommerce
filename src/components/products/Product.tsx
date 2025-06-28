@@ -1,6 +1,11 @@
+"use client"
+
+import { addToCart, removeFromCart } from "@/redux/slices/cartSlice";
+import { AppDispatch } from "@/redux/store";
 import { getBlurDataURL, numberFormat } from "@/utils/Helper";
 import Image from "next/image";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
 
 interface ProductType {
     product: {
@@ -16,6 +21,14 @@ interface ProductType {
 }
 
 export default function Product({ product }: ProductType) {
+
+    const dispath = useDispatch<AppDispatch>()
+
+    const handleAddProductCart = () => {
+        dispath(removeFromCart(product.id))
+        dispath(addToCart({ product, qty: 1 }))
+    }
+
     return (
         <div className="box">
             <div>
@@ -43,9 +56,9 @@ export default function Product({ product }: ProductType) {
                             </h6>
                         )}
 
-                        <a href="">
+                        <button onClick={() => handleAddProductCart()}>
                             <i className="bi bi-cart-fill text-white fs-5"></i>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
