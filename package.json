@@ -21,7 +21,8 @@
     "react-leaflet": "^5.0.0-rc.2",
     "react-redux": "^9.2.0",
     "react-tabs": "^6.1.0",
-    "react-toastify": "^11.0.5"
+    "react-toastify": "^11.0.5",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -30,6 +31,7 @@
     "@types/nprogress": "^0.2.3",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/redux-persist": "^4.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.4",
     "typescript": "^5"
