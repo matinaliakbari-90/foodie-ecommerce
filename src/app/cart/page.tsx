@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function CartPage() {
 
-    const dispath = useDispatch<AppDispatch>()
+    const dispatch = useDispatch<AppDispatch>()
     const cart = useSelector((state: RootState) => state.shoppingCart.cart)
 
     return (
@@ -59,11 +59,11 @@ export default function CartPage() {
                                                             </td>
                                                             <td>
                                                                 <div className="input-counter">
-                                                                    <span className="plus-btn" onClick={() => item.qty < item?.product.quantity && dispath(increment(item.product.id))}>
+                                                                    <span className="plus-btn" onClick={() => item.qty < item?.product.quantity && dispatch(increment(item.product.id))}>
                                                                         +
                                                                     </span>
                                                                     <div className="input-number">{item.qty}</div>
-                                                                    <span className="minus-btn" onClick={() => item.qty > 1 && dispath(decrement(item.product.id))}>
+                                                                    <span className="minus-btn" onClick={() => item.qty > 1 && dispatch(decrement(item.product.id))}>
                                                                         -
                                                                     </span>
                                                                 </div>
@@ -81,7 +81,7 @@ export default function CartPage() {
                                                                     </>
                                                                 )}
                                                             </td>
-                                                            <td onClick={() => dispath(removeFromCart(item.product.id))}>
+                                                            <td onClick={() => dispatch(removeFromCart(item.product.id))}>
                                                                 <i className="bi bi-x text-danger fw-bold fs-4 cursor-pointer"></i>
                                                             </td>
                                                         </tr>
@@ -89,7 +89,7 @@ export default function CartPage() {
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <button className="btn btn-primary mb-4" onClick={() => dispath(clearCart())}>پاک کردن سبد خرید</button>
+                                        <button className="btn btn-primary mb-4" onClick={() => dispatch(clearCart())}>پاک کردن سبد خرید</button>
                                     </div>
                                 </div>
                                 <div className="row mt-4">

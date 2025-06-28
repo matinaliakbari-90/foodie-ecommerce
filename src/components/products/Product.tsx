@@ -25,7 +25,7 @@ interface ProductType {
 
 export default function Product({ product }: ProductType) {
 
-    const dispath = useDispatch<AppDispatch>()
+    const dispatch = useDispatch<AppDispatch>()
     const cartItems = useSelector((state: RootState) => state.shoppingCart.cart)
 
     const toastId = useRef<string | number | null>(null);
@@ -49,8 +49,8 @@ export default function Product({ product }: ProductType) {
             }
         } else {
 
-            dispath(removeFromCart(product.id))
-            dispath(addToCart({ product, qty: 1 }))
+            dispatch(removeFromCart(product.id))
+            dispatch(addToCart({ product, qty: 1 }))
 
             if (!toast.isActive(toastId.current as string)) {
                 toastId.current = toast.success("محصول به سبد خرید شما اضافه شد", {

@@ -1,4 +1,5 @@
 import Product from "@/components/products/Product";
+import ShoppingCart from "@/components/products/ShoppingCart";
 import { getFetch } from "@/utils/fetch";
 import { getBlurDataURL, numberFormat, salePresent } from "@/utils/Helper";
 import Image from "next/image";
@@ -17,6 +18,7 @@ interface ProductRandomeType {
     sale_price: number;
     price: number;
     slug: string;
+    quantity: number;
 }
 
 export default async function ProductsPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -59,18 +61,8 @@ export default async function ProductsPage({ params }: { params: Promise<{ slug:
 
                                     <p className="product-quantity">از این محصول <strong>{product.quantity}</strong> تا موجود است.</p>
 
-                                    <div className="mt-5 d-flex">
-                                        <button className="btn-add">افزودن به سبد خرید</button>
-                                        <div className="input-counter ms-4">
-                                            <span className="plus-btn">
-                                                +
-                                            </span>
-                                            <div className="input-number">1</div>
-                                            <span className="minus-btn">
-                                                -
-                                            </span>
-                                        </div>
-                                    </div>
+                                    <ShoppingCart product={product} />
+                                    
                                 </div>
                                 <div className="col-sm-12 col-lg-6">
                                     <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
