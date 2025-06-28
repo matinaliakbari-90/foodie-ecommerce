@@ -59,7 +59,7 @@ export default function CartPage() {
                                                             </td>
                                                             <td>
                                                                 <div className="input-counter">
-                                                                    <span className="plus-btn" onClick={() => item.qty < item.product.quantity && dispath(increment(item.product.id))}>
+                                                                    <span className="plus-btn" onClick={() => item.qty < item?.product.quantity && dispath(increment(item.product.id))}>
                                                                         +
                                                                     </span>
                                                                     <div className="input-number">{item.qty}</div>

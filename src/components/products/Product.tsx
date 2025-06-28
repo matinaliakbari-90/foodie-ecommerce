@@ -1,11 +1,13 @@
 "use client"
 
 import { addToCart, removeFromCart } from "@/redux/slices/cartSlice";
-import { AppDispatch } from "@/redux/store";
+import { AppDispatch, RootState } from "@/redux/store";
 import { getBlurDataURL, numberFormat } from "@/utils/Helper";
 import Image from "next/image";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast, Zoom } from "react-toastify";
 
 interface ProductType {
     product: {
@@ -24,11 +26,47 @@ interface ProductType {
 export default function Product({ product }: ProductType) {
 
     const dispath = useDispatch<AppDispatch>()
+    const cartItems = useSelector((state: RootState) => state.shoppingCart.cart)
+
+    const toastId = useRef<string | number | null>(null);
 
     const handleAddProductCart = () => {
-        dispath(removeFromCart(product.id))
-        dispath(addToCart({ product, qty: 1 }))
+        const existItem = cartItems.some(item => item.product.id === product.id)
+
+        if (existItem) {
+            if (!toast.isActive("exist")) {
+                toast.info("محصول در سبد خرید شما وجود دارد", {
+                    toastId: "exist",
+                    position: "top-center",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    theme: "colored",
+                    transition: Zoom,
+                    closeOnClick: true,
+                    draggable: true,
+                    rtl: true,
+                });
+            }
+        } else {
+
+            dispath(removeFromCart(product.id))
+            dispath(addToCart({ product, qty: 1 }))
+
+            if (!toast.isActive(toastId.current as string)) {
+                toastId.current = toast.success("محصول به سبد خرید شما اضافه شد", {
+                    position: "top-center",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    theme: "colored",
+                    transition: Zoom,
+                    draggable: true,
+                    closeOnClick: true,
+                    rtl: true,
+                });
+            }
+        }
     }
+
 
     return (
         <div className="box">

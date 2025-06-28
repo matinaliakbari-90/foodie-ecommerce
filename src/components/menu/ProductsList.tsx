@@ -11,6 +11,7 @@ interface ProductType {
     is_sale: boolean;
     sale_price: number;
     price: number;
+    quantity: number;
 }
 
 export default async function ProductsList({ params }: { params: string }) {

@@ -15,6 +15,8 @@ interface ProductTabType {
         is_sale: boolean;
         sale_price: number;
         price: number;
+        quantity: number;
+        slug?: string;
     }[][];
 }
 
@@ -28,6 +30,7 @@ interface ProductPanelType {
     sale_price: number;
     price: number;
     slug?: string;
+    quantity: number;
 }
 
 
