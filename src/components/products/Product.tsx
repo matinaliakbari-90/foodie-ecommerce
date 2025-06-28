@@ -17,6 +17,7 @@ interface ProductType {
         sale_price: number;
         price: number;
         slug?: string;
+        quantity: number;
     }
 }
 

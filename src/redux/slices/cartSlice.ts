@@ -11,6 +11,7 @@ interface Product {
     sale_price: number;
     price: number;
     slug?: string;
+    quantity: number;
 }
 
 interface CartItems {
@@ -35,12 +36,25 @@ export const cartSlice = createSlice({
             state.cart = [...state.cart, { product, qty }]
             // console.log(state.cart)
         },
+
         removeFromCart: (state, action: PayloadAction<number>) => {
             state.cart = state.cart.filter(p => p.product.id !== action.payload)
+        },
+
+        increment: (state, action: PayloadAction<number>) => {
+            state.cart = state.cart.map(p => p.product.id === action.payload ? { ...p, qty: p.qty + 1 } : p)
+        },
+
+        decrement: (state, action: PayloadAction<number>) => {
+            state.cart = state.cart.map(p => p.product.id === action.payload ? { ...p, qty: p.qty - 1 } : p)
+        },
+
+        clearCart: (state) => {
+            state.cart = [];
         }
     },
 })
 
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, increment, decrement, clearCart } = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;

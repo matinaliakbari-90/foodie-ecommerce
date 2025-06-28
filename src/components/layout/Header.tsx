@@ -6,12 +6,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useContext } from "react";
 import AuthContext, { AuthContextType } from "@/context/AuthContext";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 
 export default function Header() {
 
     const pathname = usePathname();
     const { user } = useContext(AuthContext) as AuthContextType;
+    const cart = useSelector((state: RootState) => state.shoppingCart.cart)
 
     return (
         <div className={pathname === '/' ? '' : 'sub_page'}>
@@ -54,7 +57,7 @@ export default function Header() {
                                     <Link className="cart_link position-relative" href="/cart">
                                         <i className="bi bi-cart-fill text-white fs-5"></i>
                                         <span className="position-absolute top-0 translate-middle badge rounded-pill">
-                                            3
+                                            {cart.length}
                                         </span>
                                     </Link>
 
