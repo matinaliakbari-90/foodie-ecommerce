@@ -1,5 +1,6 @@
 "use client";
 
+import Addresses from "@/components/cart/Addresses";
 import Coupon from "@/components/cart/Coupon";
 import { clearCart, decrement, increment, removeFromCart, totalAmountCart } from "@/redux/slices/cartSlice";
 import { AppDispatch, RootState } from "@/redux/store";
@@ -15,6 +16,7 @@ export default function CartPage() {
     const cart = useSelector((state: RootState) => state.shoppingCart.cart)
 
     const [coupon, setCoupon] = useState({ 'percent': 0, 'code': '' })
+    const [addressId, setAddressId] = useState<number | null>(null)
     const totalAmount = useSelector(totalAmountCart)
 
     return (
@@ -101,16 +103,7 @@ export default function CartPage() {
                                     <Coupon setCoupon={setCoupon} />
 
                                     <div className="col-12 col-md-6 d-flex justify-content-end align-items-baseline">
-                                        <div>
-                                            انتخاب آدرس
-                                        </div>
-                                        <select style={{ width: "200px" }} className="form-select ms-3" aria-label="Default select example">
-                                            <option value='0'>منزل</option>
-                                            <option value="1">محل کار</option>
-                                        </select>
-                                        <a href="profile.html" className="btn btn-primary">
-                                            ایجاد آدرس
-                                        </a>
+                                        <Addresses setAddressId={setAddressId} />
                                     </div>
                                 </div>
                                 <div className="row justify-content-center mt-5">

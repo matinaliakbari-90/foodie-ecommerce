@@ -1,6 +1,6 @@
 "use client";
 
-import { createCoupon } from "@/actions/coupon";
+import { createCoupon } from "@/actions/cart";
 import { useActionState, useEffect } from "react";
 import { toast, Zoom } from "react-toastify";
 
