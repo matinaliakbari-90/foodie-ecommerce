@@ -99,7 +99,6 @@ export async function checkOtp(stateOtp: StateAction, formData: FormData) {
             httpOnly: true,
             path: '/',
             maxAge: 60 * 60 * 24 * 7,  // 1 week
-            secure: process.env.NODE_ENV === 'production'
         })
 
         return {
@@ -162,7 +161,6 @@ export async function resendOtp() {
             httpOnly: true,
             path: '/',
             maxAge: 60 * 60 * 24 * 7,  // 1 week
-            secure: process.env.NODE_ENV === 'production'
         })
 
         return {
@@ -195,6 +193,9 @@ export async function logout() {
         (await cookies()).delete('tokens')
 
     } else {
-        throw new Error('خطا در عملیات خروج')
+        return {
+            status: data.status,
+            data: handleError(data.message)
+        };
     }
 }

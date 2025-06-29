@@ -12,13 +12,13 @@ interface StateAction {
 
 export async function sendPayment(state: StateAction, formData: FormData) {
     const cart = formData.get('cart') as string;
-    const coupon = (formData.get("coupon") as string) ?? "";
+    const coupon = (formData.get('coupon') as string) ?? "";
     const address_id = formData.get('address_id') as string;
 
     if (!address_id) {
         return {
             status: 'error',
-            message: "ابتدا یک آدرس انتخاب کنید"
+            message: 'ابتدا یک آدرس انتخاب کنید'
         }
     }
 
@@ -31,6 +31,25 @@ export async function sendPayment(state: StateAction, formData: FormData) {
             status: data.status,
             message: 'درحال انتقال به درگاه پرداخت',
             url: data.data.url
+        }
+    } else {
+        return {
+            status: data.status,
+            message: handleError(data.message)
+        }
+    }
+}
+
+
+
+export async function paymentVerify(trackId: string, status: string) {
+    const tokens = (await cookies()).get('tokens')
+    const data = await postFetch('/payment/verify', { token: trackId, status }, { "Authorization": `Bearer ${tokens?.value}` })
+
+    if (data.status === 'success') {
+        return {
+            status: data.status,
+            payment: data.data
         }
     } else {
         return {

@@ -15,8 +15,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
     const handleLogout = async () => {
         try {
-            await logout;
+            await logout();
             logoutContext()
+            router.push('/')
 
             toast.info('شما از سیستم خارج شدید', {
                 position: "top-center",
@@ -30,8 +31,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 transition: Zoom,
                 rtl: true
             })
-
-            router.push('/')
 
         } catch {
             toast.error('خطا در عملیات خروج', {

@@ -19,6 +19,9 @@ type PostBody = {
 
     cart?: string;
     coupon?: string;
+
+    token?: string;
+    status?: string;
 } | null
 
 
