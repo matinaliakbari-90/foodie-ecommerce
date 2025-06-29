@@ -2,6 +2,7 @@
 
 import Addresses from "@/components/cart/Addresses";
 import Coupon from "@/components/cart/Coupon";
+import Payment from "@/components/cart/Payment";
 import { clearCart, decrement, increment, removeFromCart, totalAmountCart } from "@/redux/slices/cartSlice";
 import { AppDispatch, RootState } from "@/redux/store";
 import { getBlurDataURL, numberFormat, salePresent } from "@/utils/Helper";
@@ -131,7 +132,8 @@ export default function CartPage() {
                                                         </div>
                                                     </li>
                                                 </ul>
-                                                <button className="user_option btn-auth mt-4">پرداخت</button>
+                                                
+                                                <Payment cart={cart} coupon={coupon} addressId={addressId} />
                                             </div>
                                         </div>
                                     </div>

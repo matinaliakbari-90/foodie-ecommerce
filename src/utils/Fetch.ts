@@ -16,6 +16,9 @@ type PostBody = {
     address_id?: string;
 
     code?: string;
+
+    cart?: string;
+    coupon?: string;
 } | null
 
 
