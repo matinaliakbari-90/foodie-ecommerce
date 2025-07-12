@@ -26,7 +26,7 @@ type PostBody = {
 
 
 const getFetch = async (url: string, headers?: object) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${url}`, {
+    const res = await fetch(`${process.env.API_URL}${url}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ const getFetch = async (url: string, headers?: object) => {
 
 
 const postFetch = async (url: string, body: PostBody, headers?: object) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${url}`, {
+    const res = await fetch(`${process.env.API_URL}${url}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

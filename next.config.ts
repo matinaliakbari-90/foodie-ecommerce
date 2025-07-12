@@ -1,12 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  reactStrictMode: true,
+
   images: {
     remotePatterns: [
       {
-        protocol: process.env.NEXT_PUBLIC_API_PROTOCOL as 'http' | 'https',
-        hostname: process.env.NEXT_PUBLIC_API_HOSTNAME as string,
-        pathname: '/**',
+        protocol: process.env.API_PROTOCOL as 'http' | 'https',
+        hostname: process.env.API_HOSTNAME as string,
       },
     ],
   },
